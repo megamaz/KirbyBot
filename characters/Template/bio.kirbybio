@@ -1,0 +1,30 @@
+
+anything that is not directly under an item will be considered a comment.
+items must be the first item on a line otherwise will be ignored.
+An item is surrounded by a backslash (\)
+Items are
+QUOTE*          a quote the character said
+BIO             a description of the character
+NLN*            a newline
+FIRSTAPPEAR     where the character first appeared in the saga
+NAME            The character's name.
+TYPE*           the character type
+
+*optional
+
+keep in mind that TYPE has to be one or more numbers
+0 enemy     does not give power up upon succ
+1 helper    gives power up upon succ
+2 boss      ... a boss.
+3 miniboss  a miniboss! those that don't take long to kill and give power up upon succ.
+4 ally      someone that fights along side kirby.
+if using multiple numbers, do not comma seperate. (as example, a miniboss helper would be 31 or 13. Order does not matter)
+
+COVER FILE MUST BE NAMED COVER.PNG!! ANYTHING ELSE WILL NOT WORK.
+
+\BIO\
+A brief description. MUST BE YOUR OWN! DO NOT TAKE IT FROM WIKIPEDIA OR THE KIRBY WIKI.
+\FIRSTAPPEAR\
+Kirbo's Hallucination
+\NAME\
+Kirbo
