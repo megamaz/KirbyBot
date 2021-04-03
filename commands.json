@@ -1,1 +1,21 @@
-[]
+[
+    {
+        "name":"wiki",
+        "description":"The Kirby Wiki!!",
+        "options":[
+            {
+                "name":"get",
+                "description":"Get wiki info!",
+                "type":1,
+                "options":[
+                    {
+                        "name":"character",
+                        "description":"The character you want to know about.",
+                        "type":3,
+                        "required":true
+                    }
+                ]
+            }
+        ]
+    }
+]

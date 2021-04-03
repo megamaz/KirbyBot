@@ -13,7 +13,7 @@ Nago
 Pitch
 Rick
 Galactic Nova
-Check Kawaski
+Chef Kawaski
 Hot Head
 Bio Spark
 Blade Knight
@@ -57,6 +57,7 @@ Zan Partizanne
 Hyness
 Daroach
 Shadow Kirby
+Kirby
 Zero-2
 Queen Sectonia
 Dark Matter
@@ -75,3 +76,4 @@ Bronto Burt
 Glunt
 Scarfy
 Shotzo
+Template
