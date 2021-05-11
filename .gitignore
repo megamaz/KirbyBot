@@ -2,5 +2,6 @@ logs
 __pycache__
 *.json
 !commands.json
+!bio.json
 reference.txt
 .vscode

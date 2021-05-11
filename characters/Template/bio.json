@@ -1,0 +1,10 @@
+{
+    "_bio":"A brief description. MUST BE YOUR OWN! DO NOT TAKE IT FROM WIKIPEDIA OR THE KIRBY WIKI.",
+    "_firstAppear":"Kirbo's hallucination",
+    "_name":"Kirbo",
+    "_image":"cover.png",
+    "_type":4,
+    "_quote":"please help",
+
+    "side note":"the _type property can also be a list! _type : [1, 2, 3]"
+}

@@ -1,8 +1,10 @@
 '''
 A python file to parse `kirbybio` files
+Kirbybio files were complete garbage what was I thinking
 '''
 
 import os
+import json
 from enum import IntEnum
 
 class KirbyBio:
@@ -52,83 +54,23 @@ class NoAppearance(KirbyBioParserException):
 
 def load(filename) -> KirbyBio:
     if not os.path.exists(filename):
-        raise FileNotFoundError("This .kirbybio file does not exist")
+        raise FileNotFoundError("This kirby bio file does not exist")
     returnValue = KirbyBio()
 
-    content = open(filename, 'r').read().splitlines()
-    returnValue.filename = filename
-    returnValue.fileContents = '\n'.join(content)
+    content:dict = json.load(open(filename))
 
-    # check if required data is there
-    if "\\NAME\\" not in content:
-        raise NoName("{file} has not \\NAME\\ property.".format(file=filename))
-    if "\\BIO\\" not in content:
-        raise NoBio("{file} has no \\BIO\\ property.".format(file=filename))
-    if "\\FIRSTAPPEAR\\" not in content:
-        raise NoAppearance("{file} has no \\FIRSTAPPEAR\\ property.".format(file=filename))
+    returnValue.bio = content["_bio"]
+    returnValue.firstappear = content["_firstAppear"]
+    returnValue.name = content["_name"]
 
-    # quote is optional
-    if "\\QUOTE\\" in content:
-        quoteInd = content.index("\\QUOTE\\")
-
-        returnValue.quote = content[quoteInd+1]
-    
-    # bio
-    bioInd = content.index("\\BIO\\")
-
-    bioContents = ""
-    inDoubleBackslash = False
-    backSlashContent = ""
-    for parseBio in content[bioInd+1]:
-        if parseBio == "\\":
-            inDoubleBackslash = not inDoubleBackslash
-            if not inDoubleBackslash:
-                backSlashContent = ""
-            continue
-        if not inDoubleBackslash:
-            bioContents += parseBio
+    if "_type" in  content.keys():
+        if type(content["_type"]) == int:
+            types = [content["_type"],]
         else:
-            backSlashContent += parseBio
-        if backSlashContent == "NLN":
-            bioContents += "\n"
+            types = content["_type"]
 
-        returnValue.bio = bioContents
+        returnValue.char_type = types
+    if "_quote" in content.keys():
+        returnValue.quote = content["_quote"]
 
-    # name
-    nameInd = content.index("\\NAME\\")
-    returnValue.name = content[nameInd+1]
-
-    # first appear
-    firstAppear = content.index("\\FIRSTAPPEAR\\")
-    returnValue.firstappear = content[firstAppear+1]
-
-    # type
-    if "\\TYPE\\" in content:
-        ctype = content.index("\\TYPE\\")
-        returnValue.char_type = [int(x) for x in content[ctype+1]]
-    
-
-    # get folder
-    folder = filename.split("/")[-2]
-    returnValue.folder = folder
     return returnValue
-
-
-def dump(bio:KirbyBio, filename):
-    '''Will completely overwrite the existing one'''
-
-    with open(filename, 'w') as dump:
-        if bio.bio != "":
-            dump.write("\\BIO\\\n")
-            dump.write(bio.bio + "\n")
-        
-        if bio.quote != "":
-            dump.write("\\QUOTE\\\n")
-
-            bioFormatted = bio.quote.replace("\\NLN\\", '\n')
-            dump.write(bioFormatted)
-
-# testing
-if __name__ == "__main__":
-
-    print(load("./characters/Template/bio.kirbybio"))

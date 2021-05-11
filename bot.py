@@ -161,13 +161,13 @@ async def wiki(ctx:SlashContext, character):
             if not os.path.exists(f"./characters/{character}/"):
                 await ctx.send("Oh no! It appear I don't have that character in my database...")
             else:
-                CharacterData = kirbybioparser.load(f"./characters/{character}/bio.kirbybio")
-                emb = discord.Embed(title=CharacterData.name, color=kirbyColor).set_thumbnail(url=f"{rawGithubHere}characters/{CharacterData.folder}/cover.png")
+                CharacterData = kirbybioparser.load(f"./characters/{character}/bio.json")
+                emb = discord.Embed(title=CharacterData.name, color=kirbyColor).set_thumbnail(url=f"{rawGithubHere}characters/{character}/cover.png")
                 emb.add_field(name="First Appearance", value=CharacterData.firstappear, inline=False)
                 if CharacterData.quote:
                     emb.add_field(name="Quoted", value=CharacterData.quote, inline=False)
                 if CharacterData.char_type:
-                    emb.add_field(name="Status", value=CharacterData.char_type, inline=False)
+                    emb.add_field(name="Status", value=', '.join(CharacterData.char_type), inline=False)
                 emb.add_field(name="Info", value=CharacterData.bio, inline=False)
                 await ctx.send(embed=emb)
 
