@@ -175,7 +175,13 @@ async def wiki(ctx:SlashContext, character):
         await reportError(func="wiki", error=e, **locals())
 
 
-
+@slash.slash(name="contribute")
+async def contribute(ctx:SlashContext):
+    try:
+        await ctx.defer() # bot is thinking...
+        await ctx.send("Thank you for your contribution!\nhttps://github.com/megamaz/KirbyBot", hidden=True)
+    except Exception as e:
+        reportError(func="contribute", error=e, **locals())
 #endregion
 
 

@@ -17,5 +17,9 @@
                 ]
             }
         ]
+    },
+    {
+        "name":"contribute",
+        "description":"This command gives you a GitHub link so you can contribute!"
     }
 ]
